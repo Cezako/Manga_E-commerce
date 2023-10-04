@@ -2,4 +2,9 @@
 
 # Ignorer le répertoire node_modules
 /node_modules
+
+node_modules/
+
 /.env.local
+
+.env.local/
