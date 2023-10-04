@@ -5,7 +5,7 @@ import UserModel from "../models/userModel.js"
 const verifyToken = (req, res, next) => {
 
     let token
-
+    
     if (req.headers['authorization'] !== undefined) {
         token = req.headers['authorization'].split(' ')[1]
     }
@@ -26,7 +26,6 @@ const verifyToken = (req, res, next) => {
 
 
 const verifyIsAdmin = (req, res, next) => {
-
     UserModel.findOne({_id: req.userId})
         .then((user) => {
             if(user.isAdmin){
@@ -40,7 +39,6 @@ const verifyIsAdmin = (req, res, next) => {
 
 
 const verifyUser = (req, res, next) => {
-
     UserModel.findOne({ _id: req.userId })
         .then((user) => {
             if (user) {
