@@ -62,7 +62,7 @@ const mangaSchema = new mongoose.Schema({
 
 
 // ERREUR DE DOUBLONS
-serieSchema.post('save', function (error, doc, next) {
+mangaSchema.post('save', function (error, doc, next) {
     if (error.name === 'MongoServerError' && error.code === 11000) {
         const message = `Le champ '${Object.keys(error.keyValue)[0]}' doit être unique.`
         next(new Error(message))
@@ -71,4 +71,4 @@ serieSchema.post('save', function (error, doc, next) {
     }
 })
 
-export default mongoose.model('Serie', serieSchema)
+export default mongoose.model('Manga', mangaSchema)
