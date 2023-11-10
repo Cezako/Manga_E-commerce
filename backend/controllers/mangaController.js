@@ -54,7 +54,7 @@ export const addManga = (req, res) => {
             product.save()
                 .then(async (product) => {
                     await copyFiles(filesName)
-                    return res.status(201).json({message: "Serie created successfully", product})
+                    return res.status(201).json({message: "Manga created successfully", product})
                 })
                 .catch((err) => res.status(400).json({error: err.message}))
         })
@@ -72,7 +72,7 @@ export const updateManga = (req, res) => {
         form.parse(req, async (err, fields, files) => {
             const product = await SerieModel.findById(fields.idToUpdate)
             if (!product) {
-                return res.status(400).json({error: "Serie not found"})
+                return res.status(400).json({error: "Manga not found"})
             }
 
             // récupère les anciennes images qu'on filtre avec celles qu'ont veut supprimer. ( deleteImages )

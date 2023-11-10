@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken"
 
 
 export const register = (req, res) => {
-    
+
     UserModel.create({
         email: req.body.email,
         password: req.body.password,
