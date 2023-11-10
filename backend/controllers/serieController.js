@@ -18,7 +18,15 @@ export const getSerie = (req, res) => {
 }
 
 
-export const getSearchedSeries = (req, res) => {}
+export const getSearchedSeries = (req, res) => {
+
+    const { search } = req.query
+    const query = search ? { $text: { $search: search } } : {}
+
+    SerieModel.find(query)
+        .then((products) => res.status(200).json({ count: products.length, products }))
+        .catch((err) => res.status(400).json({ error: "An error occurred" }))
+}
 
 
 export const addSerie = (req, res) => {
