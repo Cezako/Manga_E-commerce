@@ -14,7 +14,7 @@ export const Home = () => {
         getSeries()
             .then((serieData) => {
                 console.log(serieData)
-                setSeries(serieData.series)
+                setSeries(serieData.products)
             })
             .catch((err) => console.log(err))
     }, [])
@@ -22,23 +22,23 @@ export const Home = () => {
     return (
         <>
             <h1>Home page</h1>
-
+    
             <h2>Nos Séries :</h2>
-
-            <ul>
+            <div>
                 {series.map((serie, index) => (
-                    <li key={index}> 
+                    <div key={index}>
                         {serie.title}
-                        <ul>
+                        <div>
                             {serie.images.map((image, i) => (
-                                <li key={i}>
+                                <div key={i}>
                                     <img src={`${baseUrl}${image}`} alt={`${serie.title}_img`} />
-                                </li>
+                                </div>
                             ))}
-                        </ul>
-                    </li>
+                        </div>
+                    </div>
                 ))}
-            </ul>
+            </div>
+            
         </>
     )
 }

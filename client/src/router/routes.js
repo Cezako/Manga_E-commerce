@@ -14,8 +14,8 @@ import {Admin} from "../pages/admin/Admin.js"
 
 const publicRoutes = [
     {path: "/", component: <Home />},
-    {path: "/search", component: <Search />},
-    {path: "/serie/:id", component: <Serie />},
+    {path: "/search", component: <Search/>},
+    {path: "/serie/:id", component: <Serie/>},
     {path: "/register", component: <Register/>},
     {path: "/login", component: <Login/>},
 ]

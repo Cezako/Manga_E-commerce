@@ -35,7 +35,7 @@ export const addSerie = (req, res) => {
                 files.images = Array.isArray(files.images) ? files.images : [files.images]
             }
 
-            const filesName = identityFile(files.images ?? [], 'img/series')
+            const filesName = identityFile(files.images ?? [], '/img/series')
 
             const product = new SerieModel({
                 title: fields.title[0],
@@ -94,7 +94,7 @@ export const updateSerie = (req, res) => {
             }
 
             // récuperation des nouvelles images
-            const newImages = await identityFile(files.images ?? [], 'img/series')
+            const newImages = await identityFile(files.images ?? [], '/img/series')
 
             images.push(...newImages.map((e) => e.newName))
 

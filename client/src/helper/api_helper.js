@@ -1,11 +1,11 @@
-
+import {baseUrl} from "./url_helper.js"
 
 export async function getReq(url, config = {}){
 
     const token = localStorage.getItem('jwt')
     
     return new Promise((resolve, reject) => {
-        fetch(`http://localhost:3500${url}`, {
+        fetch(`${baseUrl}${url}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ export async function postReq(url, data, config = {}) {
     const token = localStorage.getItem('jwt')
 
     return new Promise((resolve, reject) => {
-        fetch(`http://localhost:3500${url}`, {
+        fetch(`${baseUrl}${url}`, {
             method: 'POST',
             body: config.form ? data : JSON.stringify(data),
             headers: {
@@ -62,7 +62,7 @@ export async function updateReq(url, data, config = {}) {
     const token = localStorage.getItem('jwt')
 
     return new Promise((resolve, reject) => {
-        fetch(`http://localhost:3500${url}`, {
+        fetch(`${baseUrl}${url}`, {
             method: 'UPDATE',
             body: config.form ? data : JSON.stringify(data),
             headers: {
@@ -91,7 +91,7 @@ export async function deleteReq(url, id, config = {}) {
     const token = localStorage.getItem('jwt')
 
     return new Promise((resolve, reject) => {
-        fetch(`http://localhost:3500${url}`, {
+        fetch(`${baseUrl}${url}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

@@ -33,7 +33,7 @@ export const addManga = (req, res) => {
                 files.images = Array.isArray(files.images) ? files.images : [files.images]
             }
 
-            const filesName = identityFile(files.images ?? [], 'img/series/mangas')
+            const filesName = identityFile(files.images ?? [], '/img/series/mangas')
 
             const product = new MangaModel({
                 serieId: fields.serieId[0],
@@ -94,7 +94,7 @@ export const updateManga = (req, res) => {
             }
 
             // récuperation des nouvelles images
-            const newImages = await identityFile(files.images ?? [], 'img/series/mangas')
+            const newImages = await identityFile(files.images ?? [], '/img/series/mangas')
 
             images.push(...newImages.map((e) => e.newName))
 
