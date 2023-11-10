@@ -35,8 +35,8 @@ async function init() {
 
     app.use('/products', productRouter)
     app.use('/auth', authRouter)
-    app.use('/users', /*[auth.verifyToken, auth.verifyUser],*/ userRouter)
-    app.use('/admin', /*[auth.verifyToken, auth.verifyIsAdmin],*/ adminRouter)
+    app.use('/users', [auth.verifyToken, auth.verifyUser], userRouter)
+    app.use('/admin', [auth.verifyToken, auth.verifyIsAdmin], adminRouter)
 }
 
 

@@ -2,28 +2,28 @@ import UserModel from "../models/userModel.js"
 
 
 export const getUsers = async(req, res) => {
-
-    const users = await UserModel.find()
-    res.status(200).json(users)
+    UserModel.find()
+        .then((users) => res.status(200).json({count: users.length, users}))
+        .catch((err) => res.status(400).json({error: "An error occured"}))
 }
 
 
 export const getUser = async(req, res) => {
-    
-    const user = await UserModel.findOne({_id: req.params.id})
-    res.status(200).json(user)
+    UserModel.findOne()
+        .then((users) => res.status(200).json({count: users.length, users}))
+        .catch((err) => res.status(400).json({error: "An error occured"}))
 }
 
 
 export const getLoggedUser = async(req, res) => {
-
     const user = await UserModel.findOne({_id: req.userId})
     res.status(200).json(user)
 }
 
 
-export const deleteUser = async(req, res) => {
-
-    const user = await UserModel.findOne({_id: req.params.id})
-    res.status(200).json(user)
+export const removeUser = async(req, res) => {
+    const {id} = req.params
+    UserModel.findOneAndDelete({_id: id})
+        .then((user) => res.status(204).send())
+        .catch((err) => res.status(400).json({error: "An error occured"}))
 }
