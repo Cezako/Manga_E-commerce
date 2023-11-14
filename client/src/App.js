@@ -15,7 +15,8 @@ import {useDispatch, useSelector} from "react-redux"
 import {getVerifyToken} from "./helper/backend_helper.js"
 import {addUser} from "./store/slices/userSlice.js"
 
-//CSS
+// CSS
+import "./utils/Normalize/normalize.css"
 import "./App.css"
 
 

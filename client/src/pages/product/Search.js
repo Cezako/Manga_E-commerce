@@ -9,6 +9,7 @@ export const Search = () => {
     const [series, setSeries] = useState([])
     const [search, setSearch] = useState([])
     const [searchResult, setSearchResult] = useState([])
+    const [showResult, setShowResult] = useState(false)
 
     
     useEffect(() => {
@@ -27,6 +28,8 @@ export const Search = () => {
             .then((serieData) => {
                 console.log(serieData)
                 setSearchResult(serieData.series)
+
+                setShowResult(true)
             })
             .catch((err) => console.log(err))
     }, [search])
@@ -40,6 +43,8 @@ export const Search = () => {
             .then((serieData) => {
                 console.log(serieData)
                 setSearchResult(serieData.series)
+
+                setShowResult(true)
             })
             .catch((err) => console.log(err))
     }
@@ -47,7 +52,7 @@ export const Search = () => {
 
     return (
         <>
-            <h1>Search page</h1>
+            <h1>Trouver ma série</h1>
 
             <form onSubmit={handleSubmit}>
                 <label>
@@ -55,37 +60,42 @@ export const Search = () => {
                     <input onChange={(e) => setSearch(e.target.value)} type={"search"} name={"search"}/>
                 </label>
 
-                <button>Search</button>
+                <button>Recherche</button>
             </form>
 
-
-            <h2>Résultats :</h2>
-            <ul>
-                {searchResult.map((serie, i) => (
-                    <li key={i}>
-                        {serie.title}
-                        {serie.images.map((image, i) => (
+            {showResult ?
+                <>
+                    <h2>Séries :</h2>
+                    <div>
+                        {series.map((serie, i) => (
                             <div key={i}>
-                                <img src={`${baseUrl}${image}`} alt={`${serie.title}_img`} />
-                            </div>
-                        ))}
-                    </li>
-                ))}
-            </ul>
-
-            <h2>Autres séries :</h2>
-            <div>
-                {series.map((serie, i) => (
-                    <div key={i}>
-                        {serie.title}
-                        {serie.images.map((image, i) => (
-                            <div key={i}>
-                                <img src={`${baseUrl}${image}`} alt={`${serie.title}_img`} />
+                                {serie.title}
+                                {serie.images.map((image, i) => (
+                                    <div key={i}>
+                                        <img src={`${baseUrl}${image}`} alt={`${serie.title}_img`} />
+                                    </div>
+                                ))}
                             </div>
                         ))}
                     </div>
-                ))}
-            </div>
+                </>
+                :
+                <>
+                    <h2>Résultats de recherche :</h2>
+                    <ul>
+                        {searchResult.map((serie, i) => (
+                            <li key={i}>
+                                {serie.title}
+                                {serie.images.map((image, i) => (
+                                    <div key={i}>
+                                        <img src={`${baseUrl}${image}`} alt={`${serie.title}_img`} />
+                                    </div>
+                                ))}
+                            </li>
+                        ))}
+                    </ul>
+                </>
+            }
         </>
     )
     
