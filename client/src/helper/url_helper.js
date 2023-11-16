@@ -10,7 +10,7 @@ export const VERIFY_TOKEN = "/auth/verify-token"
 // SERIES
 export const SERIES = "/products/series"
 export const SERIE = "/products/serie/:id"
-export const ADD_SERIE = "/products/add-serie"
+export const POST_SERIE = "/admin/add-serie"
 export const UPDATE_SERIE = "/products/update/serie"
 export const DELETE_SERIE = "/products/delete/serie/:id"
 export const SEARCH_SERIES = "/products/series/search/?search="
@@ -23,6 +23,7 @@ export const MANGA = "/products/manga/:id"
 
 // USER
 export const PROFIL = "/user"
+export const USERS = "/admin/users"
 
 
 //ADMIN

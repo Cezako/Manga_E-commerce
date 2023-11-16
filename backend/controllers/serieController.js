@@ -30,8 +30,11 @@ export const getSearchedSeries = (req, res) => {
 
 
 export const addSerie = (req, res) => {
+
     try {
         const form = formidable({multiples: true})
+
+        console.log(form)
 
         form.parse(req, async (err, fields, files) => {
             if (err) {
@@ -42,6 +45,9 @@ export const addSerie = (req, res) => {
             } else {
                 files.images = Array.isArray(files.images) ? files.images : [files.images]
             }
+
+            console.log('Champs du formulaire :', fields)
+            console.log('Fichiers reçus :', files)
 
             const filesName = identityFile(files.images ?? [], '/img/series')
 
@@ -55,8 +61,8 @@ export const addSerie = (req, res) => {
                 synopsis: fields.synopsis[0],
                 vfEditors: fields.vfEditors,
                 pegi: fields.pegi[0],
-                rate: fields.rate[0],
-                rateNb: fields.rateNb[0],
+                rate: 0,
+                rateNb: 0,
                 isEnded: fields.isEnded[0],
                 isVisible: fields.isVisible[0],
                 images: filesName.map((e) => e.newName)
@@ -69,7 +75,7 @@ export const addSerie = (req, res) => {
                 .catch((err) => res.status(400).json({error: err.message}))
         })
     } catch (e) {
-        console.log(e)
+        console.error('Catch block error:', e)
         res.status(400).json(e)
     }
 }

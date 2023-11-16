@@ -21,7 +21,7 @@ export const Home = () => {
 
     return (
         <>
-            <h1>Home page</h1>
+            <h1>Page d'acceuil</h1>
     
             <h2>Nos Séries :</h2>
             <div>

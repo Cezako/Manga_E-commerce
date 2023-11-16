@@ -1,5 +1,6 @@
 import {baseUrl} from "./url_helper.js"
 
+
 export async function getReq(url, config = {}){
 
     const token = localStorage.getItem('jwt')

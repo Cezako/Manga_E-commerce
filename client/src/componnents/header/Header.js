@@ -2,6 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import {useDispatch, useSelector} from "react-redux"
 import {deleteUser} from '../../store/slices/userSlice.js'
+import { useEffect } from 'react'
 
 export const Header = () => {
 
@@ -18,15 +19,13 @@ export const Header = () => {
         <header>
             <nav>
                 <div className='mainTitle'>
-                <button><Link className='logo' to="/">Acceuil</Link></button>
+                    <button><Link className='logo' to="/">Acceuil</Link></button>
                     <h1>MangaShop</h1>
                 </div>
                 <button><Link to="/Search">Trouver ma Série</Link></button>
 
-                {user.admin?
-                    <>
-                        <button><Link to="/Admin">Admin</Link></button>
-                    </>
+                {user.isAdmin?
+                    <button><Link to="/Admin">Admin</Link></button>
                 :
                     <></>
                 }
