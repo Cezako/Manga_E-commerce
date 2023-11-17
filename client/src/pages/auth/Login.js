@@ -18,6 +18,10 @@ export const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
+        showinfoError(false)
+
+        console.log({email, password})
+
         postLogin({email, password})
             .then((data) => {
 

@@ -34,7 +34,7 @@ export const addSerie = (req, res) => {
     try {
         const form = formidable({multiples: true})
 
-        console.log(form)
+        console.log(req.body)
 
         form.parse(req, async (err, fields, files) => {
             if (err) {

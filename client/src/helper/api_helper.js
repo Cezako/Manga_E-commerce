@@ -34,13 +34,19 @@ export async function postReq(url, data, config = {}) {
     const token = localStorage.getItem('jwt')
 
     return new Promise((resolve, reject) => {
+
+        //parametrage request data : Formdata ou JSON
+        const headers = {
+            'Authorization': `Bearer ${token}`
+        }
+        if (!config.form) {
+            headers['Content-Type'] = 'application/json'
+        }
+
         fetch(`${baseUrl}${url}`, {
             method: 'POST',
             body: config.form ? data : JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
+            headers: headers,
         })
         .then((response) => {
             response.json()

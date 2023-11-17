@@ -2,7 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import {useDispatch, useSelector} from "react-redux"
 import {deleteUser} from '../../store/slices/userSlice.js'
-import { useEffect } from 'react'
+
 
 export const Header = () => {
 

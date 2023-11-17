@@ -14,6 +14,7 @@ import {useDispatch, useSelector} from "react-redux"
 // RELOG USER
 import {getVerifyToken} from "./helper/backend_helper.js"
 import {addUser} from "./store/slices/userSlice.js"
+import {deleteUser} from './store/slices/userSlice.js'
 
 // CSS
 import "./utils/Normalize/normalize.css"
@@ -36,6 +37,10 @@ function App() {
 			})
 			.catch((err) => {
 				console.log(err)
+
+				// TROUVER UNE FACON DE REMOVE JWT A L'EXPIRATION !!
+				//dispatch(deleteUser())
+				//localStorage.removeItem('jwt')
 			})
 		}
 	}, [])

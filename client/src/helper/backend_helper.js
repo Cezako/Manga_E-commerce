@@ -17,7 +17,7 @@ export const postRegister = (registerParams) => postReq(REGISTER, registerParams
 // SERIES
 export const getSeries = () => getReq(SERIES)
 export const getSerie = () => getReq(SERIE)
-export const postSerie = (data) => postReq(POST_SERIE, data)
+export const postSerie = (data) => postReq(POST_SERIE, data, { form: true })
 export const updateSerie = (data) => updateReq(UPDATE_SERIE, data)
 export const deleteSerie = (productId) => deleteReq(DELETE_SERIE + productId)
 export const getSearchedSeries = (searchParams) => getReq(SEARCH_SERIES + encodeURIComponent(searchParams))
