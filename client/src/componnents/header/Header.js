@@ -31,7 +31,10 @@ export const Header = () => {
                 }
 
                 {user.isLogged?
-                    <button onClick={handleLogout}>Logout</button>
+                    <>
+                        <button onClick={handleLogout}>Logout</button>
+                        <button> <Link to="/Profil">Profil</Link></button>
+                    </>
                 :
                     <>
                         <button> <Link to="/Login">Login</Link></button>

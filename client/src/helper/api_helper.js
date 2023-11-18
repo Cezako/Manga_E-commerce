@@ -1,6 +1,7 @@
 import {baseUrl} from "./url_helper.js"
 
 
+// GET
 export async function getReq(url, config = {}){
 
     const token = localStorage.getItem('jwt')
@@ -29,6 +30,7 @@ export async function getReq(url, config = {}){
 }
 
 
+// POST
 export async function postReq(url, data, config = {}) {
 
     const token = localStorage.getItem('jwt')
@@ -64,18 +66,25 @@ export async function postReq(url, data, config = {}) {
 }
 
 
+// UPDATE
 export async function updateReq(url, data, config = {}) {
 
     const token = localStorage.getItem('jwt')
 
     return new Promise((resolve, reject) => {
+        
+        //parametrage request data : Formdata ou JSON
+        const headers = {
+            'Authorization': `Bearer ${token}`
+        }
+        if (!config.form) {
+            headers['Content-Type'] = 'application/json'
+        }
+
         fetch(`${baseUrl}${url}`, {
             method: 'UPDATE',
             body: config.form ? data : JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
+            headers: headers,
         })
         .then((response) => {
             response.json()
@@ -93,6 +102,7 @@ export async function updateReq(url, data, config = {}) {
 }
 
 
+// DELETE
 export async function deleteReq(url, id, config = {}) {
 
     const token = localStorage.getItem('jwt')

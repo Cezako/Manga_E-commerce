@@ -22,7 +22,7 @@ export const MANGA = "/products/manga/:id"
 
 
 // USER
-export const PROFIL = "/user"
+export const PROFIL = "/users/profil"
 export const USERS = "/admin/users"
 
 

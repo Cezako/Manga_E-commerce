@@ -4,11 +4,12 @@ import {postSerie} from "../../helper/backend_helper.js"
 
 export const Admin = () => {
 
+    // ADD FORM PARAMETERS
     const [title, setTitle] = useState("")
     const [voTitle, setVoTitle] = useState("")
     const [authors, setAuthors] = useState("")
     const [illustrators, setIllustrators] = useState("")
-    const [vfEditor, setVfEditor] = useState("")
+    const [vfEditors, setVfEditors] = useState("")
     const [type, setType] = useState("")
     const [synopsis, setSynopsis] = useState("")
     const [pegi, setPegi] = useState(0)
@@ -16,14 +17,17 @@ export const Admin = () => {
     const [isVisible, setIsVisible] = useState(false)
     const [images, setImages] = useState([])
 
+    // ERROR
+    const [infoError, showInfoError] = useState(false)
 
-    // GESTION DES GENRES
+    // GENRES
     const [genres, setGenres] = useState([
         { name: 'action', selected: false },
         { name: 'adventure', selected: false },
         { name: 'comedy', selected: false },
         { name: 'drama', selected: false },
-        { name: 'fantasy', selected: false }
+        { name: 'fantasy', selected: false },
+        { name: 'nekketsu', selected: false }
     ])
 
     const handleGenreChange = (index) => {
@@ -34,7 +38,7 @@ export const Admin = () => {
     }
 
 
-    // GESTION PEGI
+    // PEGI
     const pegiOptions = [
         { value: 0, label: 'Tous publics' },
         { value: 7, label: '7 ans et +' },
@@ -43,27 +47,22 @@ export const Admin = () => {
         { value: 18, label: '18 ans et + (public majeur)' },
     ]
 
-    // GESTION DES TYPES
-    const typeOptions = [
-        { value: 0, label: 'Kodomo (子供)' },
-        { value: 7, label: 'Shōnen (少年)' },
-        { value: 12, label: 'Shōjo (少女)' },
-        { value: 16, label: 'Seinen (青年)' },
-        { value: 18, label: 'Josei (女性)' },
-        { value: 18, label: 'Seijin (成人)' },
-    ]
+    // MANGAS TYPES
+    const typeOptions = ['Kodomo (子供)', 'Shōnen (少年)', 'Shōjo (少女)', 'Seinen (青年)', 'Josei (女性)', 'Seijin (成人)']
 
-
-    //ADD SUBMIT
+    // ADD FORM SUBMIT
     const handleAddSerieSubmit = (e) => {
         e.preventDefault()
+        showInfoError(false)
+
+        console.log({title, voTitle, authors, illustrators, vfEditors, type, genres, synopsis, pegi, isEnded, isVisible})
 
         const formData = new FormData()
         formData.append('title', title)
         formData.append('voTitle', voTitle)
         formData.append('authors', authors)
         formData.append('illustrators', illustrators)
-        formData.append('type', vfEditor)
+        formData.append('vfEditors', vfEditors)
         formData.append('type', type)
         genres.forEach(genre => {
             if (genre.selected) {
@@ -84,10 +83,15 @@ export const Admin = () => {
 
         postSerie(formData)
         .then(() => {
-            console.log("success")
+            console.log("Serie created successfully !")
         })
         .catch((err) => {
-            console.log(err)
+            if (err && err.status === 400) {
+                showInfoError(true)
+                console.log(err)
+            } else {
+                console.log(err)
+            }
         })
     }
 
@@ -100,26 +104,31 @@ export const Admin = () => {
 
             <form onSubmit={handleAddSerieSubmit}>
                 <label>
-                    Titre <input onChange={(e) => setTitle(e.target.value)} type={"text"} name={"title"}/>
+                    Titre 
+                    <input onChange={(e) => setTitle(e.target.value)} type={"text"} name={"title"}/>
                 </label>
                 <label>
-                    Titre VO <input onChange={(e) => setVoTitle(e.target.value)} type={"text"} name={"voTitle"} />
+                    Titre VO 
+                    <input onChange={(e) => setVoTitle(e.target.value)} type={"text"} name={"voTitle"} />
                 </label>
                 <label>
-                    Auteurs <input onChange={(e) => setAuthors(e.target.value)} type={"text"} name={"authors"} />
+                    Auteurs 
+                    <input onChange={(e) => setAuthors(e.target.value)} type={"text"} name={"authors"} />
                 </label>
                 <label>
-                    Illustrateurs <input onChange={(e) => setIllustrators(e.target.value)} type={"text"} name={"illustrators"}/>
+                    Illustrateurs 
+                    <input onChange={(e) => setIllustrators(e.target.value)} type={"text"} name={"illustrators"}/>
                 </label>
                 <label>
-                    Editeur VF <input onChange={(e) => setVfEditor(e.target.value)} type={"text"} name={"vfEditor"}/>
+                    Editeur VF 
+                    <input onChange={(e) => setVfEditors(e.target.value)} type={"text"} name={"vfEditors"}/>
                 </label>
                 <label>
                     Type:
                     <select value={type} onChange={(e) => setType(e.target.value)} name={"type"}>
                         {typeOptions.map((option, i) => (
-                            <option key={i} value={option.value}>
-                                {option.label}
+                            <option key={i} value={option}>
+                                {option}
                             </option>
                         ))}
                     </select>
@@ -140,7 +149,8 @@ export const Admin = () => {
                     ))}
                 </label>
                 <label>
-                    Synopsis <input onChange={(e) => setSynopsis(e.target.value)} type={"text"} name={"synopsis"}/>
+                    Synopsis 
+                    <textarea onChange={(e) => setSynopsis(e.target.value)} type={"text"} name={"synopsis"}/>
                 </label>
                 <label>
                     Pegi:
@@ -153,17 +163,26 @@ export const Admin = () => {
                     </select>
                 </label>
                 <label>
-                    Série visible ? <input onChange={(e) => setIsVisible(e.target.checked)} type={"checkbox"} name={"isVisible"} />
+                    Série visible ? 
+                    <input onChange={(e) => setIsVisible(e.target.checked)} type={"checkbox"} name={"isVisible"} />
                 </label>
                 <label>
-                    Série terminé ? <input onChange={(e) => setIsEnded(e.target.checked)} type={"checkbox"} name={"isEnded"} />
+                    Série terminé ? 
+                    <input onChange={(e) => setIsEnded(e.target.checked)} type={"checkbox"} name={"isEnded"} />
                 </label>
                 <label>
-                    Images <input onChange={(e) => setImages(e.target.files)} type={"file"} name={"images"} multiple/>
+                    Images 
+                    <input onChange={(e) => setImages(e.target.files)} type={"file"} name={"images"} multiple/>
                 </label>
 
                 <button> Valider </button>
             </form>
+
+            {infoError ?
+                <p>Certains champs sont vides ou incorrects</p>
+            :
+                <></>
+            }
         </>
     )
 }

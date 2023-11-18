@@ -16,8 +16,10 @@ export const getUser = async(req, res) => {
 
 
 export const getLoggedUser = async(req, res) => {
-    const user = await UserModel.findOne({_id: req.userId})
-    res.status(200).json(user)
+    
+    UserModel.findOne({_id: req.userId})
+        .then((users) => res.status(200).json({count: users.length, users}))
+        .catch((err) => res.status(400).json({error: "An error occured"}))
 }
 
 

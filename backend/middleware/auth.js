@@ -18,7 +18,7 @@ const verifyToken = (req, res, next) => {
             return res.status(401).send({message: "Unauthorized!"})
         }
         
-        console.log(decoded)
+        //console.log(decoded)
         req.userId = decoded.id
         next()
     })
@@ -31,10 +31,10 @@ const verifyIsAdmin = (req, res, next) => {
             if(user.isAdmin){
                 next()
             } else {
-                return res.status(401).send({message: "T'es pas admin!"})
+                return res.status(401).send({message: "Unauthorized!"})
             }
         })
-        .catch((err) => res.status(401).send({message: "T'existe pas!"}))
+        .catch((err) => res.status(401).send({message: "Admin not found"}))
 }
 
 
@@ -42,6 +42,7 @@ const verifyUser = (req, res, next) => {
     UserModel.findOne({ _id: req.userId })
         .then((user) => {
             if (user) {
+                //console.log(user)
                 next()
             } else {
                 return res.status(401).send({ message: "Unauthorized!" })

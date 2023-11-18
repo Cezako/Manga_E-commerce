@@ -50,34 +50,38 @@ function App() {
 		<>
 			<Header/>
 
-			<Routes>
-				{publicRoutes.map((route, i) => (
-					<Route 
-						path={route.path}
-						element={route.component}
-						key={i}
-						exact={true}
-					/>
-				))}
+			<div class="app-container">
 
-				{privateRoutes.map((route, i) => (
-					<Route 
-						path={route.path} 
-						element={<AuthMiddleware> {route.component} </AuthMiddleware>} 
-						key={i} 
-						exact={true}
-					/>
-				))}
+				<Routes>
+					{publicRoutes.map((route, i) => (
+						<Route 
+							path={route.path}
+							element={route.component}
+							key={i}
+							exact={true}
+						/>
+					))}
 
-				{adminRoutes.map((route, i) => (
-					<Route 
-						path={route.path} 
-						element={<AdminMiddleware> {route.component} </AdminMiddleware>}
-						key={i} 
-						exact={true}
-					/>
-				))}
-			</Routes>
+					{privateRoutes.map((route, i) => (
+						<Route 
+							path={route.path} 
+							element={<AuthMiddleware> {route.component} </AuthMiddleware>} 
+							key={i} 
+							exact={true}
+						/>
+					))}
+
+					{adminRoutes.map((route, i) => (
+						<Route 
+							path={route.path} 
+							element={<AdminMiddleware> {route.component} </AdminMiddleware>}
+							key={i} 
+							exact={true}
+						/>
+					))}
+				</Routes>
+
+			</div>
 		</>
 	)
 }

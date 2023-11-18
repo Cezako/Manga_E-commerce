@@ -5,14 +5,15 @@ import {getProfil} from '../../helper/backend_helper.js'
 
 export const Profil = () => {
 
-    const [profil, setProfil] = useState({email: ''})
+    const [profil, setProfil] = useState({})
 
     useEffect(() => {
 
         getProfil()
             .then((data) => {
 
-                setProfil(data)
+                console.log(data.users)
+                setProfil(data.users)
             })
             .catch((err) => console.log(err))
             
@@ -21,7 +22,7 @@ export const Profil = () => {
     return(
         
         <>
-            <h1>Welcome {profil.email} !</h1>
+            <h1>Welcome {profil.username} !</h1>
         </>
     )
 }
